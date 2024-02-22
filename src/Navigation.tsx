@@ -7,10 +7,11 @@ import { GroceryItemList } from "./screens/GroceryItemList";
 import { useEffect } from "react";
 import { apiClient } from "./api/ApiClient";
 import { RecipeList } from "./screens/RecipeList";
-import { headerColor } from "./Styles";
-import { RootStackParamList } from "./screens/rootStackParamList";
+import { primaryColor, textStyle } from "./Styles";
+import { ScreenParams } from "./screens/ScreenParams";
+import { NewGroceryListScreen } from "./screens/NewGroceryListScreen";
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<ScreenParams>();
 export function Navigation() {
 
   useEffect(() => {
@@ -22,12 +23,22 @@ export function Navigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Home">
+      <Stack.Navigator screenOptions={{ headerShown: false, animation: "none" }} initialRouteName="Home">
         <Stack.Screen name="Home" component={Home}
           options={{
             title: 'Yet another grocery list app',
             headerStyle: {
-              backgroundColor: headerColor,
+              backgroundColor: primaryColor,
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: textStyle.header,
+            headerShown: true,
+          }} />
+        <Stack.Screen name="GroceryLists" component={GroceryLists}
+          options={{
+            title: 'Yet another grocery list app',
+            headerStyle: {
+              backgroundColor: primaryColor,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -35,11 +46,11 @@ export function Navigation() {
             },
             headerShown: true,
           }} />
-        <Stack.Screen name="GroceryLists" component={GroceryLists}
+        <Stack.Screen name="NewGroceryListScreen" component={NewGroceryListScreen}
           options={{
             title: 'Yet another grocery list app',
             headerStyle: {
-              backgroundColor: headerColor,
+              backgroundColor: primaryColor,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -51,7 +62,7 @@ export function Navigation() {
           options={{
             title: 'Yet another grocery list app',
             headerStyle: {
-              backgroundColor: headerColor,
+              backgroundColor: primaryColor,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

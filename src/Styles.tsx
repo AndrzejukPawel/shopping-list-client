@@ -1,11 +1,63 @@
 import { StyleSheet } from "react-native";
 
-export const headerColor = '#f4511e';
-export const mainBackgroundColor = '#ffaa8f';
+export const primaryColor = '#f4511e';
+export const secondaryColor = '#fa845c';
+export const backgroundColor = '#ffaa8f';
+
+export const textStyle = StyleSheet.create({
+  header: {
+    fontSize: 20,
+    color: 'white',
+    textAlign: 'center',
+  },
+  mainLarge: {
+    fontSize: 48,
+    color: 'black',
+    textAlign: 'center',
+  },
+  main: {
+    fontSize: 32,
+    color: 'white',
+    textAlign: 'center',
+  },
+  secondary: {
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center',
+  },
+  inputText: {
+    fontSize: 24,
+    color: 'black',
+    textAlign: 'center',
+    paddingVertical: 4,
+  },
+  button: {
+    fontSize: 24,
+    color: 'white',
+    textAlign: 'center',
+    paddingVertical: 4,
+  },
+  shadow: {
+    textShadowColor: 'black',
+    textShadowOffset: { width: 3, height: 3 },
+    textShadowRadius: 5,
+  }
+});
+
+export const buttonStyle = StyleSheet.create({
+  generic: {
+    borderRadius: 10,
+    backgroundColor: primaryColor,
+    marginVertical: 5,
+    alignContent: 'center',
+    justifyContent: 'center',
+    minHeight: 32,
+  }
+});
 
 export const homeStyle = StyleSheet.create({
   container: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: backgroundColor,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
@@ -32,7 +84,7 @@ export const homeStyle = StyleSheet.create({
 
 export const groceryListsStyle = StyleSheet.create({
   container: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'column',
   },
@@ -79,7 +131,7 @@ export const groceryListsStyle = StyleSheet.create({
 
 export const groceryListItemStyle = StyleSheet.create({
   container: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: backgroundColor,
     flex: 1,
     flexDirection: 'column',
   },
@@ -183,11 +235,18 @@ export const groceryItemSelectionStyle = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     paddingLeft: 8,
+    borderTopLeftRadius: 1112,
+    borderTopRightRadius: 112,
   },
   addButtonImage: {
     width: 100,
     height: 100,
     borderRadius: 9999,
+  },
+  addButtonImageActive: {
     backgroundColor: '#7ffa86',
+  },
+  addButtonImageInactive: {
+    backgroundColor: '#bababa',
   }
 });

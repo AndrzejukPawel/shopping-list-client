@@ -1,13 +1,16 @@
 import { API_URL } from '@env';
+import i18next from 'i18next';
 import RNUserIdentity, { ICLOUD_ACCESS_ERROR } from 'react-native-user-identity';
 
 type HttpMethod = "all" | "get" | "post" | "put" | "delete" | "patch" | "options" | "head";
 
 class ApiClient {
   private userId!: string;
+  private locale!: string;
 
   async initialize() {
     this.userId = 'andrzejuk94@gmail.com';
+    this.locale = i18next.language.split('-')[0];
     return;
     try {
       const result = await RNUserIdentity.getUserId({})
@@ -38,13 +41,18 @@ class ApiClient {
     return this.fetchWrapper('get', path);
   }
 
+  addGroceryList(name: string) {
+    const path = `groceryList`;
+    return this.fetchWrapper('put', path, { name })
+  }
+
   deleteGroceryList(id: number) {
     const path = `groceryList/${id}`;
     return this.fetchWrapper('delete', path);
   }
 
-  getGroceryListItems(id: number, locale: string) {
-    const path = `groceryList/${id}/item?locale=${locale}`;
+  getGroceryListItems(id: number) {
+    const path = `groceryList/${id}/item?locale=${this.locale}`;
     return this.fetchWrapper('get', path);
   }
 
@@ -58,14 +66,25 @@ class ApiClient {
     return this.fetchWrapper('delete', path);
   }
 
-  getUnits(locale: string) {
-    const path = `units?locale=${locale}`;
+  getUnits() {
+    const path = `units?locale=${this.locale}`;
     return this.fetchWrapper('get', path);
   }
 
-  getGroceryItems(locale: string) {
-    const path = `groceryItems?locale=${locale}`;
+  getGroceryItems() {
+    const path = `groceryItems?locale=${this.locale}`;
     return this.fetchWrapper('get', path);
+  }
+
+  addItemToGroceryList(listId: number, itemId: number, unitsId: number, amount: number) {
+    const path = `groceryList/${listId}/item?locale=${this.locale}`;
+    return this.fetchWrapper('put', path, {
+      grocery_list_id: listId,
+      grocery_item_id: itemId,
+      amount: amount,
+      amount_unit_id: unitsId,
+      bought: false
+    })
   }
 
   private async fetchWrapper(method: HttpMethod, path: string, body?: any) {

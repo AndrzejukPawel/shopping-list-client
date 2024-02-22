@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/fa-brands-400.ttf",
+      "sha1": "acaf5320927fc169b0089f8f25afb9cfbad353b4"
+    },
+    {
+      "path": "assets/fonts/fa-regular-400.ttf",
+      "sha1": "784b4d493ab9a7996b07e4f9f71674b2f2e43e22"
+    },
+    {
+      "path": "assets/fonts/fa-solid-900.ttf",
+      "sha1": "54217d79e7b35011798d712a96d1c4ea08a0ca70"
+    },
+    {
+      "path": "assets/fonts/fa-v4compatibility.ttf",
+      "sha1": "e47d5bf853d39ec86e62f4897cbcac7dd5c3b5b9"
+    }
+  ]
+}

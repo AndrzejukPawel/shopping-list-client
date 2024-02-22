@@ -15,12 +15,13 @@
   "no": "No",
   "ok": "Ok",
   "warning": "Warning",
-  "areYouSureYouWantToDelete": "Are you sure you want to delete {{items}}?",
+  "areYouSureYouWantToDelete": "Are you sure you want to delete {{item}}?",
   "itemSuccessfullyDeleted": "{{item}} was successfully deleted.",
-  "itemsSuccessfullyDeleted": "{{items}} were successfully deleted.",
+  "itemsSuccessfullyDeleted": "{{item}} were successfully deleted.",
   "markItemBought": "Set bought",
   "markItemNotBought": "Set unbought",
   "selectProduct": "Select product",
   "addProduct": "Add product",
-  "selectUnit": "Select unit"
+  "selectUnit": "Select unit",
+  "errorProcessingTryAgain": "Something went wrong. Please try again.\n{{error}}"
 }

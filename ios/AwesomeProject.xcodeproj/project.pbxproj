@@ -14,6 +14,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-AwesomeProject-AwesomeProjectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AwesomeProject-AwesomeProjectTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		05374BA73F8B46DF9EF4EDBB /* fa-brands-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7FDABA3E48304E3E890D8D1F /* fa-brands-400.ttf */; };
+		D0EE6D43F73C4D6CBEA19089 /* fa-regular-400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 00CD74638CC94BC592D7C25D /* fa-regular-400.ttf */; };
+		BB0EB904C62C47E5B05B70D6 /* fa-solid-900.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6132D19529C94F7FBDB4283B /* fa-solid-900.ttf */; };
+		3FBDF928F31E4525A5786CFC /* fa-v4compatibility.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E73D9D96C6264F4DB3B71440 /* fa-v4compatibility.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AwesomeProject/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; path = "Target Support Files/Pods-AwesomeProject-AwesomeProjectTests/Pods-AwesomeProject-AwesomeProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		7FDABA3E48304E3E890D8D1F /* fa-brands-400.ttf */ = {isa = PBXFileReference; name = "fa-brands-400.ttf"; path = "../assets/fonts/fa-brands-400.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		00CD74638CC94BC592D7C25D /* fa-regular-400.ttf */ = {isa = PBXFileReference; name = "fa-regular-400.ttf"; path = "../assets/fonts/fa-regular-400.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6132D19529C94F7FBDB4283B /* fa-solid-900.ttf */ = {isa = PBXFileReference; name = "fa-solid-900.ttf"; path = "../assets/fonts/fa-solid-900.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E73D9D96C6264F4DB3B71440 /* fa-v4compatibility.ttf */ = {isa = PBXFileReference; name = "fa-v4compatibility.ttf"; path = "../assets/fonts/fa-v4compatibility.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +130,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				2B9ADE98CB42410AABCEA2E6 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +156,18 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		2B9ADE98CB42410AABCEA2E6 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				7FDABA3E48304E3E890D8D1F /* fa-brands-400.ttf */,
+				00CD74638CC94BC592D7C25D /* fa-regular-400.ttf */,
+				6132D19529C94F7FBDB4283B /* fa-solid-900.ttf */,
+				E73D9D96C6264F4DB3B71440 /* fa-v4compatibility.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -243,6 +264,10 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				05374BA73F8B46DF9EF4EDBB /* fa-brands-400.ttf in Resources */,
+				D0EE6D43F73C4D6CBEA19089 /* fa-regular-400.ttf in Resources */,
+				BB0EB904C62C47E5B05B70D6 /* fa-solid-900.ttf in Resources */,
+				3FBDF928F31E4525A5786CFC /* fa-v4compatibility.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

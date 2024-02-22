@@ -1,86 +1,144 @@
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { useEffect, useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { View, Button, FlatList, Alert } from "react-native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Component, ReactNode, useEffect, useLayoutEffect, useState } from "react";
+import { View, Button, FlatList, Alert, TouchableOpacity, TextInput, AnimatableStringValue, Text } from "react-native";
 import { apiClient } from "../../api/ApiClient";
 import { GroceryListModel } from "../../api/models/groceryList";
 import { GroceryListsItem } from "./components/GroceryListsItem";
-import { groceryListsStyle } from "../../Styles";
+import { backgroundColor, buttonStyle, groceryListsStyle, textStyle } from "../../Styles";
 import { alertWrapper } from "../../alerts";
+import { ScreenParams } from "../ScreenParams";
+import i18n from "../../i18n.config";
+import { SideMenu } from "../../components/SideMenu";
+import { Icon } from "../../components/Icon";
+import { Overlay } from "../../components/Overlay";
+import { PleaseWaitOverlay } from "../../components/PleaseWaitOverlay";
 
-type Params = {
-  GroceryList: { id: number };
-};
+const { t } = i18n;
 
-type Props = { navigation: NativeStackNavigationProp<Params> };
+interface GroceryListsState {
+  groceryList: GroceryListModel[];
+  rightSideMenuOpen: boolean;
+  newListName: string;
+  waiting: boolean;
+}
 
-export function GroceryLists({ navigation }: Props) {
+export class GroceryLists extends Component<NativeStackScreenProps<ScreenParams, "GroceryLists">, GroceryListsState>{
 
-  const [data, setData] = useState<GroceryListModel[]>();
-
-  const fetchData = async () => {
-    const response = await apiClient.getGroceryLists();
-    setData(await response?.json());
+  constructor(props: NativeStackScreenProps<ScreenParams, "GroceryLists">) {
+    super(props);
+    this.state = { ...this.state, waiting: true };
+    this.fetchGroceryLists().then(() => {
+      this.setState({ waiting: false });
+    });
+    this.updateHeaderRight();
   }
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  private async fetchGroceryLists() {
+    const response = await apiClient.getGroceryLists();
+    this.setState({ groceryList: await response?.json() })
+  }
 
-  const { t } = useTranslation();
+  private updateHeaderRight() {
+    this.props.navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity style={{ paddingHorizontal: 8 }} onPress={() => {
+          console.log(`hamburger pressed ${this.state.rightSideMenuOpen}`);
+          this.setState({
+            rightSideMenuOpen: !this.state.rightSideMenuOpen
+          });
+          this.updateHeaderRight();
+        }}>
+          <Icon
+            text={`\uF142`}
+            color={this.state?.rightSideMenuOpen ? 'gray' : 'white'}
+            size={textStyle.header.fontSize * 1.25} />
+        </TouchableOpacity>
+      ),
+    })
+  }
 
-  return <View style={groceryListsStyle.container}>
-    <FlatList data={data} renderItem={(info) => {
-      return <GroceryListsItem
-        key={info.item.id}
-        groceryList={info.item}
-        onPressView={() => {
-          console.log(`View item: ${info.item.id}`);
-          navigation.navigate('GroceryList', { id: info.item.id });
-        }}
-        onPressDelete={() => {
+  render() {
+    const { state } = this;
+    if (!state) {
+      return <View style={groceryListsStyle.container} />
+    }
 
-          alertWrapper({
-            message: t('areYouSureYouWantToDelete', { items: info.item.name }),
-            buttons: [
-              {
-                text: t('yes'), onPress: () => {
-                  apiClient.deleteGroceryList(info.item.id)
-                    .then((response) => {
-                      if (response?.ok) {
-                        setData(data?.filter((list) => list.id != info.item.id));
+    return <View style={groceryListsStyle.container}>
+      <FlatList data={state.groceryList} renderItem={(info) => {
+        return <GroceryListsItem
+          key={info.item.id}
+          groceryList={info.item}
+          onPressView={() => {
+            console.log(`View item: ${info.item.id}`);
+            this.props.navigation.navigate('GroceryList', { listId: info.item.id });
+          }}
+          onPressDelete={() => {
+
+            alertWrapper({
+              message: t('areYouSureYouWantToDelete', { item: info.item.name }),
+              buttons: [
+                {
+                  text: t('yes'), onPress: () => {
+                    apiClient.deleteGroceryList(info.item.id)
+                      .then((response) => {
+                        if (!response?.ok) {
+                          // TODO: send report
+                          alertWrapper({
+                            title: t('errorAlertTitle'),
+                            message: response?.statusText,
+                            buttons: [
+                              {
+                                text: t('sendReport'),
+                                onPress: () => console.log('ERROR SENT REPORT'),
+                                style: 'cancel',
+                              },
+                              { text: t('close') },
+                            ]
+                          });
+                          return;
+                        }
+                        this.setState({ groceryList: state.groceryList?.filter((list) => list.id != info.item.id) });
 
                         alertWrapper({
                           message: t('itemSuccessfullyDeleted', { item: info.item.name }),
                           buttons: [{ text: t('ok') }],
                           options: { cancelable: true },
                         });
-                      }
-                      // TODO: send report
-                      alertWrapper({
-                        title: t('errorAlertTitle'),
-                        message: response?.statusText,
-                        buttons: [
-                          {
-                            text: t('sendReport'),
-                            onPress: () => console.log('ERROR SENT REPORT'),
-                            style: 'cancel',
-                          },
-                          { text: t('close') },
-                        ]
                       });
-                    });
-                }
-              },
-              {
-                text: t('no'),
-                style: 'cancel',
-              },
-            ]
-          });
-        }} />
-    }}>
+                  }
+                },
+                {
+                  text: t('no'),
+                  style: 'cancel',
+                },
+              ]
+            });
+          }} />
+      }}>
 
-    </FlatList>
-  </View>
+      </FlatList>
+
+      <SideMenu
+        toggle={this.state.rightSideMenuOpen}
+        menuItems={[
+          {
+            text: 'Add new list', onPress: () => {
+              this.props.navigation.navigate('NewGroceryListScreen');
+              this.setState({ rightSideMenuOpen: false })
+            }
+          },
+          {
+            text: 'close on press', onPress: () => {
+              this.setState({ rightSideMenuOpen: false });
+              this.updateHeaderRight();
+            }
+          }]}
+        onBackgroundClick={() => {
+          this.setState({ rightSideMenuOpen: false });
+          this.updateHeaderRight();
+        }}>
+      </SideMenu>
+      <PleaseWaitOverlay toggle={this.state.waiting}></PleaseWaitOverlay>
+    </View>
+  }
 }

@@ -9,6 +9,10 @@ import { alertWrapper } from "../alerts";
 
 const { t } = i18n;
 
+export interface NewGroceryListScreenProps {
+  onSuccess: () => void;
+}
+
 interface NewGroceryListScreenState {
   newListName: string;
 }
@@ -45,6 +49,7 @@ export class NewGroceryListScreen extends Component<NativeStackScreenProps<Scree
             .then(() => {
               console.log("goind back");
               this.props.navigation.goBack();
+              this.props.route.params.onSuccess();
             })
             .catch((err) => alertWrapper({ title: t('errorProcessingTryAgain', { err }) }))
         } >

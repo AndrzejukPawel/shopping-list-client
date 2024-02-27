@@ -1,12 +1,11 @@
-export type GroceryListParamList = {
-  listId: number
-}
+import { NewGroceryListScreenProps } from "./NewGroceryListScreen";
+import { GroceryListProps } from "./groceryList/GroceryList";
 
 export type ScreenParams = {
   Home: undefined;
   GroceryLists: undefined;
-  GroceryList: GroceryListParamList;
+  GroceryList: GroceryListProps;
   RecipeList: undefined;
   GroceryItemList: undefined;
-  NewGroceryListScreen: undefined;
+  NewGroceryListScreen: NewGroceryListScreenProps;
 };

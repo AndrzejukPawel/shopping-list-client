@@ -1,1 +1,47 @@
-{"scope":"Workspace","tasks":{"task-BukuVQsGQUj8aTMTNLtLr":{"id":"task-BukuVQsGQUj8aTMTNLtLr","description":"Sending reports when error occurs","columnId":"column-todo"},"Mxf7hFrJhPA5CR7zVLQPU":{"id":"Mxf7hFrJhPA5CR7zVLQPU","description":"Make fetching data better/safer\nhttps://www.youtube.com/watch?v=vxkbf5QMA2g","columnId":"column-todo"},"RLsa5GtsWabnvGG_6AEir":{"id":"RLsa5GtsWabnvGG_6AEir","description":"OCR recipe from picture/foto","columnId":"column-todo"},"VDqY_f0cpG7-jRmadTzZL":{"id":"VDqY_f0cpG7-jRmadTzZL","description":"Po otwarciu przepisu okienko z wyborem składników do dodania do listy","columnId":"column-todo"}},"columns":[{"id":"column-todo","title":"To do","tasksIds":["task-BukuVQsGQUj8aTMTNLtLr","Mxf7hFrJhPA5CR7zVLQPU","RLsa5GtsWabnvGG_6AEir","VDqY_f0cpG7-jRmadTzZL"]},{"id":"column-doing","title":"Doing","tasksIds":[]},{"id":"column-done","title":"Done","tasksIds":[]}]}
+{
+  "scope": "Workspace",
+  "tasks": {
+    "task-BukuVQsGQUj8aTMTNLtLr": {
+      "id": "task-BukuVQsGQUj8aTMTNLtLr",
+      "description": "Sending reports when error occurs",
+      "columnId": "column-todo"
+    },
+    "Mxf7hFrJhPA5CR7zVLQPU": {
+      "id": "Mxf7hFrJhPA5CR7zVLQPU",
+      "description": "Make fetching data better/safer\nhttps://www.youtube.com/watch?v=vxkbf5QMA2g",
+      "columnId": "column-todo"
+    },
+    "RLsa5GtsWabnvGG_6AEir": {
+      "id": "RLsa5GtsWabnvGG_6AEir",
+      "description": "OCR recipe from picture/foto",
+      "columnId": "column-todo"
+    },
+    "VDqY_f0cpG7-jRmadTzZL": {
+      "id": "VDqY_f0cpG7-jRmadTzZL",
+      "description": "Po otwarciu przepisu okienko z wyborem składników do dodania do listy",
+      "columnId": "column-todo"
+    }
+  },
+  "columns": [
+    {
+      "id": "column-todo",
+      "title": "To do",
+      "tasksIds": [
+        "task-BukuVQsGQUj8aTMTNLtLr",
+        "Mxf7hFrJhPA5CR7zVLQPU",
+        "RLsa5GtsWabnvGG_6AEir",
+        "VDqY_f0cpG7-jRmadTzZL"
+      ]
+    },
+    {
+      "id": "column-doing",
+      "title": "Doing",
+      "tasksIds": []
+    },
+    {
+      "id": "column-done",
+      "title": "Done",
+      "tasksIds": []
+    }
+  ]
+}

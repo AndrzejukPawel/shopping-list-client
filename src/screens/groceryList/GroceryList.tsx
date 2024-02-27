@@ -14,6 +14,10 @@ import { GroceryItemModel } from "../../api/models/groceryItem";
 import { alertWrapper } from "../../alerts";
 import { t } from "i18next";
 
+export type GroceryListProps = {
+  listId: number
+}
+
 interface GroceryListState {
   groceryListItems: GroceryListItemModel[];
   allGroceryItems: GroceryItemModel[];

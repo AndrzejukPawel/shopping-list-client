@@ -26,16 +26,20 @@ export class GroceryLists extends Component<NativeStackScreenProps<ScreenParams,
 
   constructor(props: NativeStackScreenProps<ScreenParams, "GroceryLists">) {
     super(props);
-    this.state = { ...this.state, waiting: true };
-    this.fetchGroceryLists().then(() => {
-      this.setState({ waiting: false });
-    });
+    this.updateGroceryLists();
     this.updateHeaderRight();
   }
 
   private async fetchGroceryLists() {
     const response = await apiClient.getGroceryLists();
     this.setState({ groceryList: await response?.json() })
+  }
+
+  private async updateGroceryLists() {
+    this.state = { ...this.state, waiting: true };
+    this.fetchGroceryLists().then(() => {
+      this.setState({ waiting: false });
+    });
   }
 
   private updateHeaderRight() {
@@ -123,7 +127,7 @@ export class GroceryLists extends Component<NativeStackScreenProps<ScreenParams,
         menuItems={[
           {
             text: 'Add new list', onPress: () => {
-              this.props.navigation.navigate('NewGroceryListScreen');
+              this.props.navigation.navigate('NewGroceryListScreen', { onSuccess: () => this.updateGroceryLists() });
               this.setState({ rightSideMenuOpen: false })
             }
           },

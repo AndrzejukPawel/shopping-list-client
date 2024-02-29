@@ -1,8 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Home } from "./screens/home/Home";
-import { GroceryList } from "./screens/groceryList/GroceryList";
-import { GroceryLists } from "./screens/groceryLists/GroceryLists";
+import { Home } from "./screens/Home";
+import { GroceryList } from "./screens/GroceryList";
+import { GroceryLists } from "./screens/GroceryLists";
 import { GroceryItemList } from "./screens/GroceryItemList";
 import { useEffect } from "react";
 import { apiClient } from "./api/ApiClient";

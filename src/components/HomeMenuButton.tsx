@@ -1,5 +1,5 @@
 import { View, Text, ImageBackground, TouchableOpacity, GestureResponderEvent } from "react-native";
-import { homeStyle } from "../../../Styles";
+import { homeStyle } from "../Styles";
 import { Component, ReactNode } from "react";
 
 interface HomeMenuButtonProps {

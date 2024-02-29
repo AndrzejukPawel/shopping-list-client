@@ -1,11 +1,11 @@
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { SafeAreaView } from "react-native";
-import { homeStyle } from "../../Styles";
-import { HomeMenuButton } from "./components/HomeMenuButton";
+import { homeStyle } from "../Styles";
+import { HomeMenuButton } from "../components/HomeMenuButton";
 import { Component, ReactNode } from "react";
-import { ScreenParams } from "../ScreenParams";
-import i18n from "../../i18n.config";
+import { ScreenParams } from "./ScreenParams";
+import i18n from "../i18n.config";
 
 const { t } = i18n;
 

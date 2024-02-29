@@ -1,17 +1,19 @@
 import React, { Component } from "react";
 import { GestureResponderEvent, Text, TouchableOpacity, View } from "react-native";
-import { groceryListItemStyle } from "../../../Styles";
-import { GroceryListItemModel } from "../../../api/models/groceryListItem";
-import { apiClient } from "../../../api/ApiClient";
-import { alertWrapper } from "../../../alerts";
-import i18n from "../../../i18n.config";
+import { listItemStyle, textStyle } from "../Styles";
+import { GroceryListItemModel } from "../api/models/groceryListItem";
+import { apiClient } from "../api/ApiClient";
+import { alertWrapper } from "../alerts";
+import i18n from "../i18n.config";
+import { Icon } from "./Icon";
+import { Checkbox } from "./Checkbox";
 
 const { t } = i18n;
 
 interface GroceryListItemProps {
   listId: number,
   initialGroceryItem: GroceryListItemModel,
-  onDeleteSuccess: (() => void)
+  onDeleteSuccess: (() => void),
 }
 
 type GroceryListItemState = GroceryListItemModel;
@@ -61,35 +63,19 @@ export class GroceryListItem extends Component<GroceryListItemProps, GroceryList
       })
   }
 
-  private deleteButton() {
-    const listId = this.props.listId;
-    const groceryItem = this.state;
-
-    return <TouchableOpacity style={groceryListItemStyle.itemButton} onPress={async () => this.switchItemBought(listId, groceryItem)}>
-      <Text style={groceryListItemStyle.itemButtonText}>{groceryItem.bought ? t('markItemNotBought') : t('markItemBought')}</Text>
-    </TouchableOpacity >
-  }
-
   render(): React.ReactNode {
     const { listId, onDeleteSuccess } = this.props;
     const groceryItem = this.state;
 
-    return <View style={!groceryItem?.bought ? groceryListItemStyle.background : groceryListItemStyle.boughtBackground}>
-      <View >
-        <Text style={groceryListItemStyle.itemName}>{groceryItem?.name}</Text>
-        <View style={{ flexDirection: 'row' }}>
-          {<Text style={groceryListItemStyle.itemDateLabel}>{`${t('amount')}:`}</Text>}
-          <Text style={groceryListItemStyle.itemDateLabel}>{`${groceryItem?.amount} ${groceryItem?.unit_short_translation}`}</Text>
-          <View style={[{ flexDirection: 'row' }]}>
-            <TouchableOpacity style={groceryListItemStyle.itemButton} onPress={() => this.onDeleteItem(listId, groceryItem, onDeleteSuccess)}>
-              <Text style={groceryListItemStyle.itemButtonText}>{t('deleteButton')}</Text>
-            </TouchableOpacity >
-            {this.deleteButton()}
-            <View />
-          </View >
+    return <TouchableOpacity onPress={() => { this.switchItemBought(listId, groceryItem) }} onLongPress={() => this.onDeleteItem(listId, groceryItem, onDeleteSuccess)}>
+      <View style={listItemStyle.simple}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }} >
+          <Text style={[textStyle.main, { color: 'black', maxWidth: '70%' }]}>{groceryItem?.name}</Text>
+          <View style={{ flex: 1 }}></View>
+          <Text style={[textStyle.small, { color: 'black', marginLeft: '3%', width: '17%' }]}>{`${groceryItem?.amount} ${groceryItem?.unit_short_translation}`}</Text>
+          <Checkbox fontSize={28} height={'10%'} width={'10%'} value={groceryItem.bought}></Checkbox>
         </View>
       </View>
-    </View>
+    </TouchableOpacity >
   }
-
 }

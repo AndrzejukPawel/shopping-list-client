@@ -53,7 +53,7 @@ export class NewGroceryListScreen extends Component<NativeStackScreenProps<Scree
             })
             .catch((err) => alertWrapper({ title: t('errorProcessingTryAgain', { err }) }))
         } >
-          <Text style={textStyle.button}> Add</Text>
+          <Text style={[textStyle.button, { textAlign: 'center' }]}>{t('add')}</Text>
         </TouchableOpacity>
       </View>
     </View>;

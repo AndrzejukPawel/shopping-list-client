@@ -1,5 +1,5 @@
 import { NewGroceryListScreenProps } from "./NewGroceryListScreen";
-import { GroceryListProps } from "./groceryList/GroceryList";
+import { GroceryListProps } from "./GroceryList";
 
 export type ScreenParams = {
   Home: undefined;

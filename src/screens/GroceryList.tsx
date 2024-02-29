@@ -1,18 +1,20 @@
 import { Component } from "react";
 import { View, FlatList, Text, TouchableOpacity, TextInput, Image } from "react-native";
-import { apiClient } from "../../api/ApiClient";
-import { GroceryListItem } from "./components/GroceryListItem";
-import { groceryItemSelectionStyle, groceryListItemStyle } from "../../Styles";
+import { apiClient } from "../api/ApiClient";
+import { GroceryListItem } from "../components/GroceryListItem";
+import { backgroundColor, groceryItemSelectionStyle } from "../Styles";
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { ScreenParams } from "../ScreenParams";
-import { GroceryListItemModel } from "../../api/models/groceryListItem";
+import { ScreenParams } from "./ScreenParams";
+import { GroceryListItemModel } from "../api/models/groceryListItem";
 
 import SelectDropdown from 'react-native-select-dropdown';
-import { AmountUnitTranslationModel } from "../../api/models/amountUnitTranslation";
-import { GroceryItemModel } from "../../api/models/groceryItem";
-import { alertWrapper } from "../../alerts";
+import { AmountUnitTranslationModel } from "../api/models/amountUnitTranslation";
+import { GroceryItemModel } from "../api/models/groceryItem";
+import { alertWrapper } from "../alerts";
 import { t } from "i18next";
+
+//TODO: Current dropdown is poop, try out https://www.npmjs.com/package/react-native-autocomplete-dropdown
 
 export type GroceryListProps = {
   listId: number
@@ -75,12 +77,20 @@ export class GroceryList extends Component<NativeStackScreenProps<ScreenParams, 
     const { state } = this;
 
     if (!state) {
-      return <View style={groceryListItemStyle.container} />
+      return <View style={{
+        backgroundColor,
+        flex: 1,
+        flexDirection: 'column',
+      }} />
     }
 
-    return <View style={groceryListItemStyle.container}>
+    return <View style={{
+      backgroundColor,
+      flex: 1,
+      flexDirection: 'column',
+    }}>
 
-      <FlatList data={state.groceryListItems} renderItem={(info) => {
+      <FlatList contentContainerStyle={{ justifyContent: 'center' }} data={state.groceryListItems} numColumns={1} renderItem={(info) => {
         return <GroceryListItem
           key={info.item.id}
           listId={this.props.route.params.listId}

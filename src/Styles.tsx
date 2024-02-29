@@ -9,32 +9,39 @@ export const textStyle = StyleSheet.create({
     fontSize: 20,
     color: 'white',
     textAlign: 'center',
+    textAlignVertical: 'center',
   },
   mainLarge: {
     fontSize: 48,
     color: 'black',
     textAlign: 'center',
+    textAlignVertical: 'center',
   },
   main: {
     fontSize: 32,
     color: 'white',
-    textAlign: 'center',
+    textAlignVertical: 'center',
   },
   secondary: {
     fontSize: 24,
     color: 'white',
-    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
+  small: {
+    fontSize: 16,
+    color: 'white',
+    textAlignVertical: 'center',
   },
   inputText: {
     fontSize: 24,
     color: 'black',
-    textAlign: 'center',
+    textAlignVertical: 'center',
     paddingVertical: 4,
   },
   button: {
     fontSize: 24,
     color: 'white',
-    textAlign: 'center',
+    textAlignVertical: 'center',
     paddingVertical: 4,
   },
   shadow: {
@@ -54,6 +61,19 @@ export const buttonStyle = StyleSheet.create({
     minHeight: 32,
   }
 });
+
+export const listItemStyle = StyleSheet.create({
+  simple: {
+    flex: 1,
+    flexDirection: 'column',
+    borderRadius: 4,
+    backgroundColor: '#ffffff7f',
+    marginHorizontal: 10,
+    marginVertical: 3,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  }
+})
 
 export const homeStyle = StyleSheet.create({
   container: {
@@ -121,65 +141,6 @@ export const groceryListsStyle = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center',
     minHeight: 32,
-  },
-  itemButtonText: {
-    textAlign: 'center',
-    color: 'black',
-  }
-});
-
-
-export const groceryListItemStyle = StyleSheet.create({
-  container: {
-    backgroundColor: backgroundColor,
-    flex: 1,
-    flexDirection: 'column',
-  },
-  list: {
-  },
-  listContent: {
-  },
-  background: {
-    flex: 1,
-    flexDirection: 'column',
-    borderRadius: 40,
-    backgroundColor: '#ffffff9f',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    paddingHorizontal: 20,
-    paddingVertical: 10
-  },
-  boughtBackground: {
-    flex: 1,
-    flexDirection: 'column',
-    borderRadius: 40,
-    backgroundColor: '#49cc6c9f',
-    marginHorizontal: 10,
-    marginVertical: 5,
-    paddingHorizontal: 20,
-    paddingVertical: 10
-  },
-  itemName: {
-    fontSize: 32,
-    color: 'black'
-  },
-  itemDateLabel: {
-    color: 'black',
-    flex: 0.25,
-  },
-  itemDate: {
-    color: 'black',
-  },
-  itemButton: {
-    flex: 0.2,
-    borderRadius: 10,
-    backgroundColor: '#0000003f',
-    marginVertical: 0,
-    alignContent: 'center',
-    justifyContent: 'center',
-    minHeight: 40,
-    minWidth: 80,
-    marginHorizontal: 5,
   },
   itemButtonText: {
     textAlign: 'center',

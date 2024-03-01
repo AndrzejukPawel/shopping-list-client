@@ -34,6 +34,7 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
     super(props);
     this.fetchGroceryItems();
     this.fetchUnits();
+    this.setState({ selectedGroceryItem: -1, selectedUnit: -1, selectedAmount: -1 })
   }
 
   private isNewItemValid() {
@@ -121,7 +122,7 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
             }}
             inputMode="numeric"
             onChangeText={(text) => {
-              const num = Number.parseFloat(text);
+              const num = Number.parseFloat(text.replaceAll(',', '.'));
               if (!Number.isNaN(num)) {
                 this.setState({ selectedAmount: num });
               }
@@ -137,8 +138,11 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
           <TouchableOpacity
             style={{ flex: 1 }}
             onPress={() => {
+              if (!this.state.selectedGroceryItem || this.state.selectedGroceryItem < 0) return alertWrapper({ message: t('invalidGroceryItemSelected'), options: { cancelable: true } });
+              if (!this.state.selectedUnit || this.state.selectedUnit < 0) return alertWrapper({ message: t('invalidUnitSelected'), options: { cancelable: true } });
+              if (!this.state.selectedAmount || this.state.selectedAmount < 0) return alertWrapper({ message: t('invalidAmount'), options: { cancelable: true } });
               this.setState({ pleaseWait: true })
-              apiClient.addItemToGroceryList(this.props.route.params.listId, this.state.selectedGroceryItem!, this.state.selectedUnit!, this.state.selectedAmount!)
+              apiClient.addItemToGroceryList(this.props.route.params.listId, this.state.selectedGroceryItem, this.state.selectedUnit, this.state.selectedAmount)
                 .then(async (response) => {
                   if (!response?.ok) {
                     alertWrapper({ message: 'Something went wrong when adding the item. Please try again.', options: { cancelable: true } });
@@ -156,105 +160,5 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
 
       <PleaseWaitOverlay toggle={!!this.state?.pleaseWait} />
     </View>
-    // return <View style={{
-    //   backgroundColor,
-    //   flex: 1,
-    //   alignContent: 'center',
-    //   justifyContent: 'center'
-    // }}>
-    //   <Dropdown
-    //     itemTextStyle={{ color: "black" }}
-    //     data={state.allGroceryItems || []}
-    //     labelField={"name"}
-    //     valueField={"id"}
-    //     onChange={() => { }}
-    //   >
-
-    //   </Dropdown>
-    //   <SelectDropdown
-    //     buttonStyle={groceryItemSelectionStyle.productsButton}
-    //     buttonTextStyle={groceryItemSelectionStyle.productsButtonText}
-    //     rowTextStyle={groceryItemSelectionStyle.productsRowText}
-    //     renderDropdownIcon={isOpened => {
-    //       return isOpened ?
-    //         <Text style={groceryItemSelectionStyle.icon}>▲</Text>
-    //         : <Text style={groceryItemSelectionStyle.icon}>▼</Text>
-    //     }}
-    //     data={state.allGroceryItems || []}
-    //     onSelect={(item: GroceryItemModel) => {
-    //       if (item) {
-    //         this.setState({ selectedGroceryItem: item.id });
-    //       }
-    //     }}
-    //     search
-    //     defaultButtonText={t('selectProduct')}
-    //     rowTextForSelection={(item, index) => item.name}
-    //     buttonTextAfterSelection={(item, index) => item.name}
-    //   />
-    //   <View style={{ flexDirection: 'row', paddingTop: 4 }}>
-    //     <SelectDropdown
-    //       buttonStyle={groceryItemSelectionStyle.unitsButton}
-    //       buttonTextStyle={groceryItemSelectionStyle.unitsButtonText}
-    //       rowTextStyle={groceryItemSelectionStyle.unitsRowText}
-    //       renderDropdownIcon={isOpened => {
-    //         return isOpened ?
-    //           <Text style={groceryItemSelectionStyle.icon}>▲</Text>
-    //           : <Text style={groceryItemSelectionStyle.icon}>▼</Text>
-    //       }}
-    //       data={state.units || []}
-    //       onSelect={(item: AmountUnitTranslationModel) => {
-    //         console.log(`Selected unit: ${JSON.stringify(item)}`)
-    //         if (item) {
-    //           this.setState({ selectedUnit: item.id });
-    //         }
-    //       }}
-    //       defaultButtonText={t('selectUnit')}
-    //       rowTextForSelection={(item, index) => item.translation}
-    //       buttonTextAfterSelection={(item, index) => item.translation}
-    //     />
-    //     <TextInput
-    //       style={groceryItemSelectionStyle.unitsTextInput}
-    //       inputMode="numeric"
-    //       onChangeText={(text) => {
-    //         const num = Number.parseFloat(text);
-    //         if (!Number.isNaN(num)) {
-    //           this.setState({ selectedAmount: num });
-    //         }
-    //       }}
-    //     />
-
-    //     <TouchableOpacity
-    //       style={groceryItemSelectionStyle.addButton}
-    //       onPress={() => {
-    //         if (state.selectedAmount !== undefined && state.selectedAmount <= 0) {
-    //           alertWrapper({ message: 'The amount must be higher than 0.', options: { cancelable: true } });
-    //         }
-    //         else if (!this.isNewItemValid()) {
-    //           alertWrapper({ message: 'Please fill all the details for the new item first.', options: { cancelable: true } })
-    //         }
-    //         else if (this.isNewItemValid() && state.selectedAmount !== undefined && state.selectedAmount > 0) {
-    //           apiClient.addItemToGroceryList(this.props.route.params.listId, state.selectedGroceryItem!, state.selectedUnit!, state.selectedAmount!)
-    //             .then(async (response) => {
-    //               if (!response?.ok) {
-    //                 alertWrapper({ message: 'Something went wrong when adding the item. Please try again.', options: { cancelable: true } });
-    //                 return;
-    //               }
-    //               this.setState({ groceryListItems: [...state.groceryListItems!, await response.json()] });
-    //             })
-    //         }
-    //       }}>
-    //       <Image
-    //         resizeMethod="scale"
-    //         resizeMode="contain"
-    //         style={[
-    //           groceryItemSelectionStyle.addButtonImage,
-    //           this.isNewItemValid() ?
-    //             groceryItemSelectionStyle.addButtonImageActive :
-    //             groceryItemSelectionStyle.addButtonImageInactive
-    //         ]}
-    //         source={{ uri: 'https://cdn.icon-icons.com/icons2/933/PNG/512/rounded-add-button_icon-icons.com_72592.png' }}
-    //       />
-    //     </TouchableOpacity >
-    //   </View>;
   }
 }

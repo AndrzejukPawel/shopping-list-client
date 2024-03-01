@@ -1,13 +1,16 @@
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { Component } from "react";
-import { View, FlatList, TouchableOpacity } from "react-native";
+import { View, FlatList, TouchableOpacity, Text } from "react-native";
 import { apiClient } from "../api/ApiClient";
 import { GroceryListItem } from "../components/GroceryListItem";
 import { backgroundColor, textStyle } from "../Styles";
 import { ScreenParams } from "./ScreenParams";
 import { GroceryListItemModel } from "../api/models/groceryListItem";
 import { Icon } from "../components/Icon";
+import i18n from '../i18n.config';
+
+const { t } = i18n;
 
 export type GroceryListProps = {
   listId: number
@@ -58,15 +61,18 @@ export class GroceryList extends Component<NativeStackScreenProps<ScreenParams, 
       {
         !this.state ?
           <></>
-          : <FlatList contentContainerStyle={{ justifyContent: 'center' }} data={this.state.groceryListItems} numColumns={1} renderItem={(info) => {
-            return <GroceryListItem
-              key={info.item.id}
-              listId={this.props.route.params.listId}
-              initialGroceryItem={info.item}
-              onDeleteSuccess={() => this.setState({ groceryListItems: this.state.groceryListItems?.filter((val) => val.id !== info.item.id) })
-              } />
-          }}>
-          </FlatList>
+          :
+          !this.state.groceryListItems.length ?
+            <Text style={[textStyle.main, { flex: 1, color: 'white', textAlign: 'center', textAlignVertical: 'center' }]}>{t('groceryListIsEmpty')}</Text>
+            : <FlatList contentContainerStyle={{ justifyContent: 'center' }} data={this.state.groceryListItems} numColumns={1} renderItem={(info) => {
+              return <GroceryListItem
+                key={info.item.id}
+                listId={this.props.route.params.listId}
+                initialGroceryItem={info.item}
+                onDeleteSuccess={() => this.setState({ groceryListItems: this.state.groceryListItems?.filter((val) => val.id !== info.item.id) })
+                } />
+            }}>
+            </FlatList>
       }
     </View>
 

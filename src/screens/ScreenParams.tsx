@@ -1,5 +1,6 @@
 import { NewGroceryListScreenProps } from "./NewGroceryListScreen";
 import { GroceryListProps } from "./GroceryList";
+import { AddNewProdcutToGroceryListScreenProps } from "./AddNewProdcutToGroceryListScreen";
 
 export type ScreenParams = {
   Home: undefined;
@@ -8,4 +9,5 @@ export type ScreenParams = {
   RecipeList: undefined;
   GroceryItemList: undefined;
   NewGroceryListScreen: NewGroceryListScreenProps;
+  AddNewProdcutToGroceryListScreen: AddNewProdcutToGroceryListScreenProps
 };

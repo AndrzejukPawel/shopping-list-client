@@ -11,6 +11,7 @@ import { primaryColor, textStyle } from "./Styles";
 import { ScreenParams } from "./screens/ScreenParams";
 import { NewGroceryListScreen } from "./screens/NewGroceryListScreen";
 import { LogBox } from 'react-native';
+import { AddNewProdcutToGroceryListScreen } from "./screens/AddNewProdcutToGroceryListScreen";
 
 LogBox.ignoreLogs([
   'Non-serializable values were found in the navigation state',
@@ -77,6 +78,18 @@ export function Navigation() {
           }} />
         <Stack.Screen name="RecipeList" component={RecipeList} />
         <Stack.Screen name="GroceryItemList" component={GroceryItemList} />
+        <Stack.Screen name="AddNewProdcutToGroceryListScreen" component={AddNewProdcutToGroceryListScreen}
+          options={{
+            title: 'Yet another grocery list app',
+            headerStyle: {
+              backgroundColor: primaryColor,
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerShown: true,
+          }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

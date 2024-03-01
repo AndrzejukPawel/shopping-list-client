@@ -1,6 +1,7 @@
 import { Component, ReactNode } from "react";
 import { ColorValue, DimensionValue, View } from "react-native";
 import { Icon } from "./Icon";
+import { successColor } from "../Styles";
 
 interface CheckboxProps {
   color?: ColorValue;
@@ -27,7 +28,7 @@ export class Checkbox extends Component<CheckboxProps> {
     }}>
       <Icon
         text={this.props.symbol ?? '\u2713'}
-        color={this.props.value ? this.props.color ?? '#58bf69' : '#ffffff00'}
+        color={this.props.value ? this.props.color ?? successColor : '#ffffff00'}
         fontSize={28}></Icon>
     </View>
   }

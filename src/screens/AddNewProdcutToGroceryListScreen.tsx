@@ -32,15 +32,8 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
 
   constructor(props: NativeStackScreenProps<ScreenParams, "AddNewProdcutToGroceryListScreen">) {
     super(props);
-    this.fetchGroceryItems();
-    this.fetchUnits();
-    this.setState({ selectedGroceryItem: -1, selectedUnit: -1, selectedAmount: -1 })
-  }
-
-  private isNewItemValid() {
-    const { state } = this;
-    const { selectedGroceryItem, selectedUnit, selectedAmount } = state;
-    return !!selectedGroceryItem && !!selectedUnit && !!selectedAmount;
+    this.state
+    Promise.all([this.fetchGroceryItems(), this.fetchUnits()]);
   }
 
   private async fetchGroceryItems() {

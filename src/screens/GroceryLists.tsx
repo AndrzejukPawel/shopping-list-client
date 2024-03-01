@@ -24,10 +24,19 @@ interface GroceryListsState {
 
 export class GroceryLists extends Component<NativeStackScreenProps<ScreenParams, "GroceryLists">, GroceryListsState>{
 
+  private unsubscribe: () => void;
+
   constructor(props: NativeStackScreenProps<ScreenParams, "GroceryLists">) {
     super(props);
     this.updateGroceryLists();
     this.updateHeaderRight();
+    this.unsubscribe = props.navigation.addListener('focus', () => {
+      this.updateGroceryLists();
+    });
+  }
+
+  componentWillUnmount(): void {
+    this.unsubscribe();
   }
 
   private async fetchGroceryLists() {

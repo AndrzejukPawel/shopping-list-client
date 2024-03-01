@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, GestureResponderEvent, Text, TouchableOpacity, View } from "react-native";
 import { GroceryListModel } from "../api/models/groceryList";
-import { groceryListsStyle, homeStyle, listItemStyle, textStyle } from "../Styles";
+import { homeStyle, listItemStyle, successColor, textStyle } from "../Styles";
 import i18n from "../i18n.config";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { ScreenParams } from "../screens/ScreenParams";
@@ -56,13 +56,24 @@ export class GroceryListsItem extends Component<GroceryListsItemProps, {}> {
     const createdAtTime = this.formatTimestamp(groceryList.created_at);
     const modifiedAtTime = this.formatTimestamp(groceryList.updated_at);
 
+    const bought = groceryList.bought ?? 0;
+    const total = bought + (groceryList.not_bought ?? 0);
+
     return <TouchableOpacity
       onPress={() => { this.props.navigation.navigate('GroceryList', { listId: groceryList.id }); }}
       onLongPress={() => { this.onDelete(groceryList) }}
     >
       <View style={listItemStyle.simple}>
         <View style={{ flexDirection: 'column' }} >
-          <Text style={[textStyle.main, { color: 'black' }]}>{groceryList.name}</Text>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Text style={[textStyle.main, {
+              color: 'black',
+              flex: 1,
+              flexWrap: 'wrap',
+              marginRight: 20
+            }]}>{groceryList.name}</Text>
+            <Text style={[textStyle.secondary, { color: total != 0 && bought == total ? successColor : 'black' }]}>{`${bought}/${total}`}</Text>
+          </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Text style={[textStyle.small, { color: 'black' }]}>{`${t('createdAt')}: ${createdAtTime}`}</Text>
             <Text style={[textStyle.small, { color: 'black' }]}>{`${t('updatedAt')}: ${modifiedAtTime}`}</Text>

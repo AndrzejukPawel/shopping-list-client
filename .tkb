@@ -20,6 +20,11 @@
       "id": "VDqY_f0cpG7-jRmadTzZL",
       "description": "Po otwarciu przepisu okienko z wyborem składników do dodania do listy",
       "columnId": "column-todo"
+    },
+    "iqnfUEdz50aCMQjbgaOD2": {
+      "id": "iqnfUEdz50aCMQjbgaOD2",
+      "description": "Grocery list \"Updated at\" is not updated",
+      "columnId": "column-todo"
     }
   },
   "columns": [
@@ -30,7 +35,8 @@
         "task-BukuVQsGQUj8aTMTNLtLr",
         "Mxf7hFrJhPA5CR7zVLQPU",
         "RLsa5GtsWabnvGG_6AEir",
-        "VDqY_f0cpG7-jRmadTzZL"
+        "VDqY_f0cpG7-jRmadTzZL",
+        "iqnfUEdz50aCMQjbgaOD2"
       ]
     },
     {

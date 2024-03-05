@@ -27,7 +27,7 @@ export class GroceryListItem extends Component<GroceryListItemProps, GroceryList
 
   private onDeleteItem(listId: number, item: GroceryListItemModel, onSuccessCallback: () => void) {
     alertWrapper({
-      message: t('areYouSureYouWantToDelete', { item: `${item.amount} ${item.unit_short_translation} ${item.name}` }),
+      message: t('areYouSureYouWantToDelete', { item: `${item.amount} ${item.unit_short_name} ${item.name}` }),
       buttons: [
         {
           text: t('yes'),
@@ -72,7 +72,7 @@ export class GroceryListItem extends Component<GroceryListItemProps, GroceryList
         <View style={{ flexDirection: 'row', alignItems: 'center' }} >
           <Text style={[textStyle.main, { color: 'black', maxWidth: '70%' }]}>{groceryItem?.name}</Text>
           <View style={{ flex: 1 }}></View>
-          <Text style={[textStyle.small, { color: 'black', marginLeft: '3%', width: '17%' }]}>{`${groceryItem?.amount} ${groceryItem?.unit_short_translation}`}</Text>
+          <Text style={[textStyle.small, { color: 'black', marginLeft: '3%', width: '17%' }]}>{`${groceryItem?.amount} ${groceryItem?.unit_short_name}`}</Text>
           <Checkbox fontSize={28} height={'10%'} width={'10%'} value={groceryItem.bought}></Checkbox>
         </View>
       </View>

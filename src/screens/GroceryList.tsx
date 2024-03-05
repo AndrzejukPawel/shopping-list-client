@@ -32,6 +32,7 @@ export class GroceryList extends Component<NativeStackScreenProps<ScreenParams, 
           this.props.navigation.navigate('AddNewProdcutToGroceryListScreen', {
             listId: this.props.route.params.listId,
             onSuccess: (newItem) => {
+              console.log(JSON.stringify(newItem));
               this.setState({ groceryListItems: [...this.state.groceryListItems!, newItem] });
             }
           });

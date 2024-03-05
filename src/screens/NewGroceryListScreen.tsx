@@ -45,7 +45,7 @@ export class NewGroceryListScreen extends Component<NativeStackScreenProps<Scree
         flexShrink: 1,
       }]}>
         <TouchableOpacity style={{ flex: 1 }} onPress={() =>
-          apiClient.addGroceryList(this.state.newListName)
+          apiClient.createGroceryList(this.state.newListName)
             .then(() => {
               console.log("goind back");
               this.props.navigation.goBack();

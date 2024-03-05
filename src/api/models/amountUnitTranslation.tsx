@@ -1,6 +1,6 @@
-export interface AmountUnitTranslationModel {
+export interface AmountUnitModel {
   id: number;
   locale_id: number;
-  translation: string;
-  short_translation: string;
+  name: string;
+  short_name: string;
 }

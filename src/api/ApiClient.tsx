@@ -9,7 +9,7 @@ class ApiClient {
   private locale!: string;
 
   async initialize() {
-    this.userId = 'andrzejuk94@gmail.com';
+    this.userId = 'test';
     this.locale = i18next.language.split('-')[0];
     return;
     try {
@@ -36,14 +36,9 @@ class ApiClient {
     return this.fetchWrapper('get', path);
   }
 
-  getGroceryList(id: number) {
-    const path = `groceryList/${id}?userId=${this.userId}`;
-    return this.fetchWrapper('get', path);
-  }
-
-  addGroceryList(name: string) {
+  createGroceryList(name: string) {
     const path = `groceryList`;
-    return this.fetchWrapper('put', path, { name })
+    return this.fetchWrapper('put', path, { name, owner: this.userId });
   }
 
   deleteGroceryList(id: number) {
@@ -72,7 +67,7 @@ class ApiClient {
   }
 
   getGroceryItems() {
-    const path = `groceryItems?locale=${this.locale}`;
+    const path = `groceryItem?locale=${this.locale}`;
     return this.fetchWrapper('get', path);
   }
 

@@ -41,7 +41,9 @@ export class GroceryLists extends Component<NativeStackScreenProps<ScreenParams,
 
   private async fetchGroceryLists() {
     const response = await apiClient.getGroceryLists();
-    this.setState({ groceryList: await response?.json() })
+    const resp = await response?.json();
+    console.log(JSON.stringify(resp));
+    this.setState({ groceryList: resp })
   }
 
   private async updateGroceryLists() {

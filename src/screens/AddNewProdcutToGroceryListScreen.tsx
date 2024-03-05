@@ -7,7 +7,7 @@ import { ScreenParams } from "./ScreenParams";
 import { apiClient } from "../api/ApiClient";
 import { alertWrapper } from "../alerts";
 import { GroceryItemModel } from "../api/models/groceryItem";
-import { AmountUnitTranslationModel } from "../api/models/amountUnitTranslation";
+import { AmountUnitModel } from "../api/models/amountUnitTranslation";
 import { Dropdown } from "react-native-element-dropdown";
 import { GroceryListItemModel } from "../api/models/groceryListItem";
 import { PleaseWaitOverlay } from "../components/PleaseWaitOverlay";
@@ -24,7 +24,7 @@ interface AddNewProdcutToGroceryListScreenState {
   selectedGroceryItem: number;
   selectedUnit: number;
   selectedAmount: number;
-  units: AmountUnitTranslationModel[] | undefined;
+  units: AmountUnitModel[] | undefined;
   pleaseWait?: boolean;
 }
 
@@ -48,9 +48,9 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
 
   private async fetchUnits() {
     const response = await apiClient.getUnits();
-    const units = ((await response?.json()) as AmountUnitTranslationModel[])?.sort((a, b) => {
-      if (a.translation.toLowerCase() < b.translation.toLowerCase()) return -1;
-      if (a.translation.toLowerCase() > b.translation.toLowerCase()) return 1;
+    const units = ((await response?.json()) as AmountUnitModel[])?.sort((a, b) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
       return 0;
     });
     this.setState({ units });
@@ -94,7 +94,7 @@ export class AddNewProdcutToGroceryListScreen extends Component<NativeStackScree
             iconColor="white"
             activeColor={primaryColor}
             data={this.state?.units || []}
-            labelField={"translation"}
+            labelField={"name"}
             valueField={"id"}
             onChange={(item) => {
               this.setState({ selectedUnit: item.id });
